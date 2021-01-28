@@ -1,0 +1,1 @@
+## Welcome to the Kubernetes cheat sheet for shorthand configurations
