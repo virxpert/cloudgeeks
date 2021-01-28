@@ -57,7 +57,7 @@ function set-cloudClientProperties {
         $env:vra_keyfile = $vra_keyfile
         $env:vra_iaas_keyfile = $vra_keyfile
         $env:vra_tenant = $vra_tenant
-
+        $env:vra_password = $vra_password 
 
     }
 
