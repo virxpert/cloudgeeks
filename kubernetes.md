@@ -12,4 +12,4 @@ post this update it with following commands
 set smarttab
 set autoindent
 set shiftwidth=2
-set expandtab```
+set expandtab
