@@ -15,11 +15,14 @@ set autoindent
 set shiftwidth=2
 set expandtab
 ```
+Set the alias for the `kubectl`
 
+`alias k=kubectl`
 
 ## Kubernetes Cheatsheet
 
 ### Pods
+`k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 
 ### ReplicaSets
 
