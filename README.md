@@ -1,37 +1,101 @@
-## Welcome to GitHub Pages
+## Welcome to the Kubernetes cheat sheet for shorthand configurations
+![CI](https://github.com/virxpert/k8s.github.io/workflows/CI/badge.svg)
 
-You can use the [editor on GitHub](https://github.com/virxpert/cloudgeeks/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### create .vimrc file to set the VIM interpreter to best config
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+create a `.vimrc` file at the root location
 
-### Markdown
+`vim ~/.vimrc`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+post this update it with following commands
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
+set number
+set smarttab
+set autoindent
+set shiftwidth=2
+set expandtab
+```
+Set the alias for the `kubectl`
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+`alias k=kubectl`
 
-### Jekyll Themes
+## Linux Commands Cheatsheets
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/virxpert/cloudgeeks/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Reverse Search
 
-### Support or Contact
+Press `ctrl+r` type the `Keyword` in the command history
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+![Reverse Search](reverse-search.gif)
+
+### grep
+
+Use the `grep` command after the ` | ` command with below useful switch
+
+`-i`, `--ignore-case` --> ignore case distinctions in patterns and data
+
+`--no-ignore-case`      do not ignore case distinctions (default)
+![grep -i](grep-i.gif)
+
+#### Context control:
+
+  `-B`, `--before-context=NUM`  print NUM lines of leading context
+
+  `-A`, `--after-context=NUM`   print NUM lines of trailing context
+
+  `-C`, `--context=NUM`         print NUM lines of output context
+![grep -A](grep-A4.gif)
+
+
+## Kubernetes Cheatsheet
+
+### Pods
+`k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
+
+### ReplicaSets
+
+### Services
+
+### Labels
+
+### Job & CronJobs
+
+### annotations
+
+### Deployments
+
+### DaemonSets
+
+
+Example Yaml
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-one
+spec:
+  selector:
+    matchLabels:
+      system: DaemonSetOne
+  template:
+    metadata:
+      labels:
+        system: DaemonSetOne
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.1
+        ports:
+        - containerPort: 80
+```
+### Rolling Updates and Rollbacks
+
+flag _`OnDelete`_ upgrades the container when the predecessor is deleted.
+
+Flag _`RollingUpdate`_ begins the update immediately.
+
+
+### Volume and Data
+
+- Encoded data can be passed using a Secret and non-encoded data can be passed with a _ConfigMap_. These can be used to pass important data like _SSH keys_, _passwords_, or even a configuration file like `/etc/hosts`.
+
