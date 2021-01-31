@@ -36,6 +36,15 @@ Use the `grep` command after the ` | ` command with below useful switch
 `--no-ignore-case`      do not ignore case distinctions (default)
 ![grep -i](grep-i.gif)
 
+#### Context control:
+
+  `-B`, `--before-context=NUM`  print NUM lines of leading context
+
+  `-A`, `--after-context=NUM`   print NUM lines of trailing context
+
+  `-C`, `--context=NUM`         print NUM lines of output context
+![grep -A](grep-A4.gif)
+
 
 ## Kubernetes Cheatsheet
 
