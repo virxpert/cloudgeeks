@@ -30,7 +30,7 @@ Press `ctrl+r` type the `Keyword` in the command history
 
 ### grep
 
-Use the `grep` command after the ` "|" ` command with below useful switch
+Use the `grep` command after the _`pipe`_ command with below useful switch
 
 `-i`, `--ignore-case` --> ignore case distinctions in patterns and data
 
