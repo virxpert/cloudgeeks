@@ -1,5 +1,5 @@
 ## Welcome to the Kubernetes cheat sheet for shorthand configurations
-
+![CI](https://github.com/virxpert/k8s.github.io/workflows/CI/badge.svg?event=page_build)
 ### create .vimrc file to set the VIM interpreter to best config
 
 create a `.vimrc` file at the root location
