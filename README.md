@@ -30,7 +30,7 @@ Press `ctrl+r` type the `Keyword` in the command history
 
 ### grep
 
-Use the `grep` command after the ` | ` command with below useful switch
+Use the `grep` command after the ` "|" ` command with below useful switch
 
 `-i`, `--ignore-case` --> ignore case distinctions in patterns and data
 
@@ -51,6 +51,9 @@ Use the `grep` command after the ` | ` command with below useful switch
 
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
+#### remote into Pod
+`k exec --stdin --tty ds-one-kjds -- /bin/bash`
+
 
 ### ReplicaSets
 
@@ -98,4 +101,35 @@ Flag _`RollingUpdate`_ begins the update immediately.
 ### Volume and Data
 
 - Encoded data can be passed using a Secret and non-encoded data can be passed with a _ConfigMap_. These can be used to pass important data like _SSH keys_, _passwords_, or even a configuration file like `/etc/hosts`.
+The cluster groups volumes with the same mode together, then sorts volumes by size, from smallest to largest. The claim is checked against each in that access mode group, until a volume of sufficient size matches.The three access modes are:
+
+    - ReadWriteOnce, which allows read-write by a single node.
+    - ReadOnlyMany, which allows read-only by multiple nodes.
+    - ReadWriteMany, which allows read-write by many nodes. 
+Sample Yaml
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: volumetest
+  name: volumetest
+spec:
+  containers:
+  - image: nginx
+    name: volumetest
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+      - mountPath: /scratch
+        name: scratch-volume
+  volumes:
+  - name: scratch-volume
+    emptyDir: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  ```
+  #### Volumne Types
+  
 
