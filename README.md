@@ -130,7 +130,8 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   ```
-  #### Volume Types
+  
+#### Volume Types
 
 |Cloud |  Volume Type |
 |------|-------|
