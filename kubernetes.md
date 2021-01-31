@@ -91,7 +91,9 @@ spec:
 
 flag _`OnDelete`_ upgrades the container when the predecessor is deleted.
 
-Flag _`RollingUpdate`_ begins the upfate immediately.
+Flag _`RollingUpdate`_ begins the update immediately.
 
+
+### Volume and Data
 
 
