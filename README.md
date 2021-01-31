@@ -106,7 +106,9 @@ The cluster groups volumes with the same mode together, then sorts volumes by si
     - ReadWriteOnce, which allows read-write by a single node.
     - ReadOnlyMany, which allows read-only by multiple nodes.
     - ReadWriteMany, which allows read-write by many nodes. 
+    
 Sample Yaml
+
 ```
 apiVersion: v1
 kind: Pod
