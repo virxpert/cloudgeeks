@@ -1,5 +1,6 @@
 ## Welcome to the Kubernetes cheat sheet for shorthand configurations
 ![CI](https://github.com/virxpert/k8s.github.io/workflows/CI/badge.svg)
+<<<<<<< HEAD
 
 ### create .vimrc file to set the VIM interpreter to best config
 
@@ -49,6 +50,56 @@ Use the `grep` command after the ` | ` command with below useful switch
 
 ## Kubernetes Cheatsheet
 
+=======
+### create .vimrc file to set the VIM interpreter to best config
+
+create a `.vimrc` file at the root location
+
+`vim ~/.vimrc`
+
+post this update it with following commands
+
+```
+set number
+set smarttab
+set autoindent
+set shiftwidth=2
+set expandtab
+```
+Set the alias for the `kubectl`
+
+`alias k=kubectl`
+
+## Linux Commands Cheatsheets
+
+### Reverse Search
+
+Press `ctrl+r` type the `Keyword` in the command history
+
+![Reverse Search](reverse-search.gif)
+
+### grep
+
+Use the `grep` command after the ` | ` command with below useful switch
+
+`-i`, `--ignore-case` --> ignore case distinctions in patterns and data
+
+`--no-ignore-case`      do not ignore case distinctions (default)
+![grep -i](grep-i.gif)
+
+#### Context control:
+
+  `-B`, `--before-context=NUM`  print NUM lines of leading context
+
+  `-A`, `--after-context=NUM`   print NUM lines of trailing context
+
+  `-C`, `--context=NUM`         print NUM lines of output context
+![grep -A](grep-A4.gif)
+
+
+## Kubernetes Cheatsheet
+
+>>>>>>> master
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 
@@ -68,6 +119,7 @@ Use the `grep` command after the ` | ` command with below useful switch
 
 
 Example Yaml
+<<<<<<< HEAD
 ```
 apiVersion: apps/v1
 kind: DaemonSet
@@ -88,6 +140,28 @@ spec:
         ports:
         - containerPort: 80
 ```
+=======
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-one
+spec:
+  selector:
+    matchLabels:
+      system: DaemonSetOne
+  template:
+    metadata:
+      labels:
+        system: DaemonSetOne
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.1
+        ports:
+        - containerPort: 80
+```
+>>>>>>> master
 ### Rolling Updates and Rollbacks
 
 flag _`OnDelete`_ upgrades the container when the predecessor is deleted.
