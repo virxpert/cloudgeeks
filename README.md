@@ -132,6 +132,11 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   ```
-  #### Volumne Types
-  
+  #### Volume Types
+
+|Cloud |  Volume Type |
+|------|-------|
+|GCE  |  GCEpersistentDisk |
+|AWS  |  awsElasticBlockStore |
+
 
