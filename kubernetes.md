@@ -96,4 +96,5 @@ Flag _`RollingUpdate`_ begins the update immediately.
 
 ### Volume and Data
 
+- Encoded data can be passed using a Secret and non-encoded data can be passed with a _ConfigMap_. These can be used to pass important data like _SSH keys_, _passwords_, or even a configuration file like `/etc/hosts`.
 
