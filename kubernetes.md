@@ -19,6 +19,12 @@ Set the alias for the `kubectl`
 
 `alias k=kubectl`
 
+## Linux Commands Cheatsheets
+
+Reverse Search --> `ctrl+r` type the `Keyword` in the command history
+![Reverse Search](reverse-search.gif)
+
+
 ## Kubernetes Cheatsheet
 
 ### Pods
@@ -46,14 +52,13 @@ kind: DaemonSet
 metadata:
   name: ds-one
 spec:
-  replicas: 2
   selector:
     matchLabels:
       system: DaemonSetOne
   template:
     metadata:
       labels:
-        system: ReplicaOne
+        system: DaemonSetOne
     spec:
       containers:
       - name: nginx
@@ -61,5 +66,11 @@ spec:
         ports:
         - containerPort: 80
 ```
+### Rolling Updates and Rollbacks
+
+flag _`OnDelete`_ upgrades the container when the predecessor is deleted.
+
+Flag _`RollingUpdate`_ begins the upfate immediately.
+
 
 
