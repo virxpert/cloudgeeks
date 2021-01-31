@@ -21,8 +21,20 @@ Set the alias for the `kubectl`
 
 ## Linux Commands Cheatsheets
 
-Reverse Search --> `ctrl+r` type the `Keyword` in the command history
+### Reverse Search
+
+Press `ctrl+r` type the `Keyword` in the command history
+
 ![Reverse Search](reverse-search.gif)
+
+### grep
+
+Use the `grep` command after the ` | ` command with below useful switch
+
+`-i`, `--ignore-case` --> ignore case distinctions in patterns and data
+
+`--no-ignore-case`      do not ignore case distinctions (default)
+![grep -i](grep-i.gif)
 
 
 ## Kubernetes Cheatsheet
