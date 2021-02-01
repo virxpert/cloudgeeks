@@ -131,7 +131,7 @@ spec:
     emptyDir: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-  ```
+```
   
 #### Volume Types
 
@@ -140,4 +140,33 @@ spec:
 |GCE  |  GCEpersistentDisk |
 |AWS  |  awsElasticBlockStore |
 
+#### Persistent Volumes and Claims
+
+Persistent storage phases
+
+_**Provision** `==>` **Bind** `==>` **Use** `==>` **Release** `==>` **Reclaim**_
+
+Commands:
+
+`Kubectl get pv` 
+
+`Kubectl get pvc`
+
+#### Persistent Volume
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: 10gpv01
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/somepath/data01"
+```
 
