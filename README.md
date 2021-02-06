@@ -53,6 +53,7 @@ Use the `grep` command after the _`pipe`_ command with below useful switch
 To get all pods in all Namespaces
 
 `k get all -A`
+|--------|-----------|
 |`-A` | used for shorthand for --all-namespaces |
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
