@@ -49,6 +49,11 @@ Use the `grep` command after the _`pipe`_ command with below useful switch
 
 ## Kubernetes Cheatsheet
 
+### K8s Useful switch(s)
+To get all pods in all Namespaces
+
+`k get all -A`
+|`-A` | used for shorthand for --all-namespaces |
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 #### remote into Pod
@@ -131,7 +136,7 @@ spec:
     emptyDir: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
-  ```
+```
   
 #### Volume Types
 
@@ -140,4 +145,33 @@ spec:
 |GCE  |  GCEpersistentDisk |
 |AWS  |  awsElasticBlockStore |
 
+#### Persistent Volumes and Claims
+
+Persistent storage phases
+
+_**Provision** `==>` **Bind** `==>` **Use** `==>` **Release** `==>` **Reclaim**_
+
+Commands:
+
+`Kubectl get pv` 
+
+`Kubectl get pvc`
+
+#### Persistent Volume
+Create a persistent Volume using below yaml
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: 10gpv01
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/somepath/data01"
+```
 
