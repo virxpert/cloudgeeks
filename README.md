@@ -20,6 +20,14 @@ Set the alias for the `kubectl`
 
 `alias k=kubectl`
 
+#### Auto-Complete in linux 
+```
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+alias k=kubectl
+complete -F __start_kubectl k
+```
+
 ## Linux Commands Cheatsheets
 
 ### Reverse Search
@@ -54,9 +62,11 @@ To get all pods in all Namespaces
 
 `k get all -A`
 
-|--------|-----------|
+|shorthand| description
+| -------- | ----------- | 
+|`-A` | used for shorthand for `--all-namespaces` |
+|`-o wide`| display the complete details if the command e.g. labels etc|
 
-|`-A` | used for shorthand for --all-namespaces |
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 #### remote into Pod
