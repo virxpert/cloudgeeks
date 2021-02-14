@@ -190,4 +190,10 @@ spec:
   hostPath:
     path: "/somepath/data01"
 ```
+#### Secrets
 
+`kubectl get secrets`
+
+**Syntax of creating the Secret **
+
+`kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]`
