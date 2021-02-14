@@ -194,6 +194,6 @@ spec:
 
 `kubectl get secrets`
 
-**Syntax of creating the Secret **
+_Syntax of creating the Secret_
 
 `kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]`
