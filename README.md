@@ -66,6 +66,9 @@ To get all pods in all Namespaces
 | -------- | ----------- | 
 |`-A` | used for shorthand for `--all-namespaces` |
 |`-o wide`| display the complete details if the command e.g. labels etc|
+|`sudo swapoff -a`| if the error occurs "The connection to the server <_master node>:6443_ was refused - did you specify the right host or port?"|
+| `less /var/log/syslog` | running logs of the server |
+|`: ` + _shift +end_ | makes the realtime log stream in the syslog|
 
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
@@ -187,4 +190,10 @@ spec:
   hostPath:
     path: "/somepath/data01"
 ```
+#### Secrets
 
+`kubectl get secrets`
+
+**Syntax of creating the Secret **
+
+`kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]`
