@@ -196,7 +196,9 @@ spec:
 
 _Syntax of creating the Secret_
 
-`kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]`
+```
+kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]
+```
 
 Manually Encoding the a string with base64-encoding
 
