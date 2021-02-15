@@ -197,3 +197,60 @@ spec:
 _Syntax of creating the Secret_
 
 `kubectl create secret generic NAME [--type=string] [--from-file=[key=]source] [--from-literal=key1=value1]`
+
+Manually Encoding the a string with base64-encoding
+
+`echo ThiSisTri@lP@$$word | base64`
+
+**output** `==>` _VGhpU2lzVHJpQGxQQDIwMTh3b3JkCg==_
+
+Example of using Secrets as the **_Environment Variable_**
+
+```
+spec:
+  containers:
+    - image: mysql:5.5
+      env:
+      - name: <MYSQL_ROOT_PASSWORD>
+      valueFrom:
+        secretKeyRef:
+          name: mysql
+          key: password
+      name: mysql
+```
+Example
+
+Create a Secret 
+
+```
+kubectl create secret generic mysql --from-literal=password=root
+```
+Create a Pod using the above created secret within the POD yaml 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secret-pod
+  labels:
+    type: secret
+spec:
+  containers:
+  - name: busy
+    image: busybox
+    command:
+      - sleep
+      - "3600"
+    volumeMounts:
+    - mountPath: /mysqlpassword
+      name: mysql
+  volumes:
+    - name: mysql
+      secret:
+        secretName: mysql
+```
+Dycrypt the secret stored withing the POD created above
+
+```
+kubecl exec -ti secret-pod --cat /mysqlpassword/password
+```
+
