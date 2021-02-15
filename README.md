@@ -255,4 +255,14 @@ Dycrypt the secret stored withing the POD created above
 ```
 kubecl exec -ti secret-pod --cat /mysqlpassword/password
 ```
+#### ConfigMaps
 
+ A ConfigMap is similar to a Secret which are basically Key-Value pairs, except they are not base64 byte encoded arrays. They are stored as strings and can be read in serialized form.
+ 
+ There are 3 different ways, a configMap can ingest the data
+ 
+ - From a Literal Value
+ - From a file
+ - From a directory of files
+
+ 
