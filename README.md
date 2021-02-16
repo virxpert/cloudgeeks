@@ -127,7 +127,9 @@ The cluster groups volumes with the same mode together, then sorts volumes by si
     - ReadWriteOnce, which allows read-write by a single node.
     - ReadOnlyMany, which allows read-only by multiple nodes.
     - ReadWriteMany, which allows read-write by many nodes. 
-    
+
+**_Note:_** Within any given POD yaml defination, _VolumeMounts_ section gets added under _containers_ and _volumes_ section to General _spec_.
+
 Sample Yaml
 
 ```
@@ -265,4 +267,66 @@ kubecl exec -ti secret-pod --cat /mysqlpassword/password
  - From a file
  - From a directory of files
 
- 
+Example Pod creation with _ValueFrom_ ConfigMap
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+      - name: ilike
+        valueFrom:
+          configMapKeyRef:
+            name: color
+            key: favorite
+```
+ConfigMap values can be stored as the _enviroment Variables_ with in the POD
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+      - configMapRef:
+          name: colors
+```
+ConfigMap can also be mapped as the _Volume_ to the POD
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tomoto
+  namespace: default
+data:
+  food.color: red
+  food.shape: round
+  food.type: vegetable
+```
+Create POD using the above configMap
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: car-vol
+      mountPath: /etc/cars
+  volumes:
+  - name: car-vol
+    configMap:
+      name: fast-car
+```
