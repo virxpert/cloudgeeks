@@ -127,7 +127,9 @@ The cluster groups volumes with the same mode together, then sorts volumes by si
     - ReadWriteOnce, which allows read-write by a single node.
     - ReadOnlyMany, which allows read-only by multiple nodes.
     - ReadWriteMany, which allows read-write by many nodes. 
-    
+
+**_Note:_** Within any given POD yaml defination, _VolumeMounts_ section gets added under _containers_ and _volumes_ section to General _spec_.
+
 Sample Yaml
 
 ```
@@ -189,6 +191,38 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/somepath/data01"
+```
+Sample Yaml of POD with nfs mount, before creating this deployment, i have defined PV and PVC using nfs volume
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-pvc
+  name: nginx-pvc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-pvc
+  template:
+    metadata:
+      labels:
+        app: nginx-pvc
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-pvc
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nfs-vol
+          mountPath: /opt
+      volumes:
+      - name: nfs-vol
+        persistentVolumeClaim:
+          claimName: pvc-one
 ```
 #### Secrets
 
@@ -265,4 +299,66 @@ kubecl exec -ti secret-pod --cat /mysqlpassword/password
  - From a file
  - From a directory of files
 
- 
+Example Pod creation with _ValueFrom_ ConfigMap
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+      - name: ilike
+        valueFrom:
+          configMapKeyRef:
+            name: color
+            key: favorite
+```
+ConfigMap values can be stored as the _enviroment Variables_ with in the POD
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+      - configMapRef:
+          name: colors
+```
+ConfigMap can also be mapped as the _Volume_ to the POD
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tomoto
+  namespace: default
+data:
+  food.color: red
+  food.shape: round
+  food.type: vegetable
+```
+Create POD using the above configMap
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: car-vol
+      mountPath: /etc/cars
+  volumes:
+  - name: car-vol
+    configMap:
+      name: fast-car
+```
