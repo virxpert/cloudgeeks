@@ -192,6 +192,38 @@ spec:
   hostPath:
     path: "/somepath/data01"
 ```
+Sample Yaml of POD with nfs mount, before creating this deployment, i have defined PV and PVC using nfs volume
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-pvc
+  name: nginx-pvc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-pvc
+  template:
+    metadata:
+      labels:
+        app: nginx-pvc
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-pvc
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nfs-vol
+          mountPath: /opt
+      volumes:
+      - name: nfs-vol
+        persistentVolumeClaim:
+          claimName: pvc-one
+```
 #### Secrets
 
 `kubectl get secrets`
