@@ -69,11 +69,18 @@ To get all pods in all Namespaces
 |`sudo swapoff -a`| if the error occurs "The connection to the server <_master node>:6443_ was refused - did you specify the right host or port?"|
 | `less /var/log/syslog` | running logs of the server |
 |`: ` + _shift +end_ | makes the realtime log stream in the syslog|
+|`du -h /opt/` | gives the file size of the path provided|
 
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 #### remote into Pod
+below command remote into the POD and keep the session alive
+
 `k exec --stdin --tty ds-one-kjds -- /bin/bash`
+
+below command remote into the POD and get the output by closing the session
+
+`k exec pod-name --ti -- /bin/bash -c 'ls -l'`
 
 
 ### ReplicaSets
@@ -361,4 +368,17 @@ spec:
   - name: car-vol
     configMap:
       name: fast-car
+```
+#### Resource Quota
+use the _ResourceQuota_ object to both limit the total consumption as well as the number of persistent volume claims (PVC)
+
+```
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: storagequota
+spec:
+  hard:
+    persistentvolumeclaims: "10"
+    requests.storage: "500Mi"
 ```
