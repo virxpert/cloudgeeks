@@ -382,3 +382,9 @@ spec:
     persistentvolumeclaims: "10"
     requests.storage: "500Mi"
 ```
+Update the _Retention Policy_ to either _Delete_ , _Retain_ or _Recycle_
+
+```
+kubectl patch pv pvvol-1 -p \
+'{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+```
