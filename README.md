@@ -87,6 +87,27 @@ below command remote into the POD and get the output by closing the session
 
 ### Services
 
+```
+kubectl expose deployment nginx --port=80 --type=NodePort
+```
+```
+Kubectl get svc
+```
+-- A particular _port_ and  _targetPort_ can also be specified during object creation to avoid random values to ports.
+
+-- The range of cluster IPs and the range of ports used for the random NodePort are configurable in the API server startup options.
+
+-- Services can also be used to point to a service in a different namespace, or even a resource outside the cluster, such as a legacy application not yet in Kubernetes
+
+|Service Type| Description|
+|---------|----------|
+|_ClusterIP_| It is default Service Type and provide access internally. Range Defined within API server Startup option|
+|_NodePort_| It is required for the debugging or when a static IP is required to open trought Firewall. range is defined in Cluster Configuration|
+|_LoadBalancer_| it works well with the Cloud Porider (GKE/AWS) or thier plugin in Private Cloud. the address is made available to public traffic, and packets are spread among the Pods in the deployment automatically|
+|_ExternalName_| _This is new service_ which allows the return of alias to the external Service. It happens at the DNS level. |
+
+
+
 ### Labels
 
 ### Job & CronJobs
