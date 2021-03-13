@@ -145,6 +145,11 @@ data:
 kind: ConfigMap
 ......
 ```
+### Ingress
+
+Ingress controller is more efficient over the use of Services to expose containerized application to the outside world.
+Instead of using lots of services, such as _LoadBalancer_, you can route traffic based on the request host or path. This allows for centralization of many services to a single point.
+
 
 ### Labels
 `kubectl get nodes -l system=secondary`
