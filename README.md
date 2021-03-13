@@ -92,6 +92,7 @@ kubectl expose deployment nginx --port=80 --type=NodePort
 ```
 ```
 Kubectl get svc
+kubectl get ep
 ```
 -- A particular _port_ and  _targetPort_ can also be specified during object creation to avoid random values to ports.
 
@@ -102,13 +103,65 @@ Kubectl get svc
 |Service Type| Description|
 |---------|----------|
 |_ClusterIP_| It is default Service Type and provide access internally. Range Defined within API server Startup option|
-|_NodePort_| It is required for the debugging or when a static IP is required to open trought Firewall. range is defined in Cluster Configuration|
+|_NodePort_| It is required for the debugging or when a static IP is required to open through Firewall. range is defined in Cluster Configuration|
 |_LoadBalancer_| it works well with the Cloud Porider (GKE/AWS) or thier plugin in Private Cloud. the address is made available to public traffic, and packets are spread among the Pods in the deployment automatically|
 |_ExternalName_| _This is new service_ which allows the return of alias to the external Service. It happens at the DNS level. |
 
+##### coredns
+`dig 10.96.0.10 -x 10.96.0.10`
 
+_**-x**_ agrument returns the FQDN of the IP we know.
+
+_Edit_ configMap for the CodeDNS Pod will adjust the FQDN domain resolution
+
+```
+apiVersion: v1
+data:
+  Corefile: |
+    .:53 {
+        rewrite stop {
+        name regex (.*)\.test\.io {1}.default.svc.cluster.local
+        answer name (.*)\.default\.svc\.cluster\.local {1}.test.io
+          }
+        errors
+        health {
+           lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+           pods insecure
+           fallthrough in-addr.arpa ip6.arpa
+           ttl 30
+        }
+        prometheus :9153
+        forward . /etc/resolv.conf {
+           max_concurrent 1000
+        }
+        cache 30
+        loop
+        reload
+        loadbalance
+    }
+kind: ConfigMap
+......
+```
 
 ### Labels
+`kubectl get nodes -l system=secondary`
+
+` k get po -n testing --show-labels`
+
+`k delete pods -n testing -l system=secondary`
+
+`k get all -A -o wide --show-labels`
+
+Label Node:
+
+`k label node ubuntu-worker system=secondary`
+
+remove label from Node:
+
+`k label node ubuntu-worker system-`
 
 ### Job & CronJobs
 
