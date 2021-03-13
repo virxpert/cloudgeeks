@@ -150,6 +150,13 @@ kind: ConfigMap
 Ingress controller is more efficient over the use of Services to expose containerized application to the outside world.
 Instead of using lots of services, such as _LoadBalancer_, you can route traffic based on the request host or path. This allows for centralization of many services to a single point.
 
+Multiple Ingress Controllers can be deployed. Traffic should use _annotations_ to select the proper controller. The lack of a matching annotation will cause every controller to attempt to satisfy the ingress traffic.
+
+```
+k get ingress
+k delete ingress <name of the ingress>
+k edit ingress <name of the ingress>
+```
 
 ### Labels
 `kubectl get nodes -l system=secondary`
