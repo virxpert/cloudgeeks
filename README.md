@@ -148,6 +148,21 @@ kind: ConfigMap
 
 ### Labels
 `kubectl get nodes -l system=secondary`
+
+` k get po -n testing --show-labels`
+
+`k delete pods -n testing -l system=secondary`
+
+`k get all -A -o wide --show-labels`
+
+Label Node:
+
+`k label node ubuntu-worker system=secondary`
+
+remove label from Node:
+
+`k label node ubuntu-worker system-`
+
 ### Job & CronJobs
 
 ### annotations
