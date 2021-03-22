@@ -158,7 +158,13 @@ k get ingress
 k delete ingress <name of the ingress>
 k edit ingress <name of the ingress>
 ```
+#### Service Mesh
 
+The _Service Mesh_ provide the complex connection/resources such as 
+- Service Discovery
+- Rate Limiting
+- Traffic Management
+- Advanced Metrics
 ### Labels
 `kubectl get nodes -l system=secondary`
 
@@ -475,3 +481,6 @@ Update the _Retention Policy_ to either _Delete_ , _Retain_ or _Recycle_
 kubectl patch pv pvvol-1 -p \
 '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
+### Scheduling
+#### Kube-Scheduler
+  The Kube-scheduler determines the nodes for the POD placement using _Topology-aware_ Algorithm.
