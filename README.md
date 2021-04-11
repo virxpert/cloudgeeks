@@ -70,6 +70,7 @@ To get all pods in all Namespaces
 | `less /var/log/syslog` | running logs of the server |
 |`: ` + _shift +end_ | makes the realtime log stream in the syslog|
 |`du -h /opt/` | gives the file size of the path provided|
+|`wc -l` | gives you the word count length |
 
 ### Pods
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
@@ -484,3 +485,17 @@ kubectl patch pv pvvol-1 -p \
 ### Scheduling
 #### Kube-Scheduler
   The Kube-scheduler determines the nodes for the POD placement using _Topology-aware_ Algorithm.
+  
+  The Scheduler goes through a set of _filters_ or _Predicates_ to find available nodes and then rank each node using priority functions.
+
+  #### Taints
+
+  A node with a particular taint will repel Pods without tolerations for that taint. A taint is expressed as key=value:effect. The key and the value are created by the administrator.
+
+  - NoScheduling
+  - PreferNoScheduling
+  - NoExecute
+
+  #### Tolerations
+
+  Setting tolerations on a node are used to schedule Pods on tainted nodes. This provides an easy way to avoid Pods using the node. Only those with a particular toleration would be scheduled.
