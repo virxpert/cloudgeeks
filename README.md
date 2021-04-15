@@ -85,16 +85,16 @@ below command remote into the POD and get the output by closing the session
 `k exec pod-name --ti -- /bin/bash -c 'ls -l'`
 
 #### List Pods
-|Command|description|
-|----------------|-------------|
-|`kubectl get pods`| list the pod within default namespace|
-|`kubectl get pods -o wide`| list all the pod with detailed view|
-|`kubectl get pods -n kube-system`| List the pods within given Namespace|
-|`kubectl get pods --selector app=test`| list all the pods which have given selector|
-|`kubectl get pods --selector app=test, application=testing`|filter and list all the pods with combination of selector criteria|
-|`kubectl get pods -A` _or_ `kubectl get pods --all-namespaces`| list all the pods for all namespaces within the cluster|
-|`kubectl get pods --show-labels`| list all pods with list of labels|
-|`kubectl describe pod xyz`| get the status of the pods|
+|Command  |description|
+|--------- |------------- |
+|`kubectl get pods`| list the pod within default namespace |
+|`kubectl get pods -o wide`| list all the pod with detailed view |
+|`kubectl get pods -n kube-system`| List the pods within given Namespace |
+|`kubectl get pods --selector app=test`| list all the pods which have given selector |
+|`kubectl get pods --selector app=test, application=testing`|filter and list all the pods with combination of selector criteria |
+|`kubectl get pods -A` _or_ `kubectl get pods --all-namespaces`| list all the pods for all namespaces within the cluster |
+|`kubectl get pods --show-labels`| list all pods with list of labels |
+|`kubectl describe pod xyz`| get the status of the pods |
 
 
 ### ReplicaSets
@@ -114,12 +114,12 @@ kubectl get ep
 
 -- Services can also be used to point to a service in a different namespace, or even a resource outside the cluster, such as a legacy application not yet in Kubernetes
 
-|Service Type| Description|
-|---------|----------|
-|_ClusterIP_| It is default Service Type and provide access internally. Range Defined within API server Startup option|
-|_NodePort_| It is required for the debugging or when a static IP is required to open through Firewall. range is defined in Cluster Configuration|
-|_LoadBalancer_| it works well with the Cloud Porider (GKE/AWS) or thier plugin in Private Cloud. the address is made available to public traffic, and packets are spread among the Pods in the deployment automatically|
-|_ExternalName_| _This is new service_ which allows the return of alias to the external Service. It happens at the DNS level. |
+|Service Type| Description |
+|---------|---------- |
+|_ClusterIP_ | It is default Service Type and provide access internally. Range Defined within API server Startup option |
+|_NodePort_ | It is required for the debugging or when a static IP is required to open through Firewall. range is defined in Cluster Configuration |
+|_LoadBalancer_ | it works well with the Cloud Porider (GKE/AWS) or thier plugin in Private Cloud. the address is made available to public traffic, and packets are spread among the Pods in the deployment automatically |
+|_ExternalName_ | _This is new service_ which allows the return of alias to the external Service. It happens at the DNS level. |
 
 ##### coredns
 `dig 10.96.0.10 -x 10.96.0.10`
