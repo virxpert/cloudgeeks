@@ -127,6 +127,7 @@ kubectl get ep
 |_ExternalName_ | _This is new service_ which allows the return of alias to the external Service. It happens at the DNS level. |
 
 ##### coredns
+
 `dig 10.96.0.10 -x 10.96.0.10`
 
 _**-x**_ agrument returns the FQDN of the IP we know.
@@ -185,9 +186,10 @@ The _Service Mesh_ provide the complex connection/resources such as
 - Traffic Management
 - Advanced Metrics
 ### Labels
+
 `kubectl get nodes -l system=secondary`
 
-` k get po -n testing --show-labels`
+`k get po -n testing --show-labels`
 
 `k delete pods -n testing -l system=secondary`
 
