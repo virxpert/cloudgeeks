@@ -71,8 +71,9 @@ To get all pods in all Namespaces
 |`: ` + _shift +end_ | makes the realtime log stream in the syslog|
 |`du -h /opt/` | gives the file size of the path provided|
 |`wc -l` | gives you the word count length |
-
+|`sed 's/unix/linux/2'` | sed command is Stream Editor where `'s'` == substitute/'_what_'/'_with what_'/`'2'` (replace second occurance)in the line|
 ### Pods
+
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
 #### remote into Pod
 below command remote into the POD and keep the session alive
@@ -82,6 +83,18 @@ below command remote into the POD and keep the session alive
 below command remote into the POD and get the output by closing the session
 
 `k exec pod-name --ti -- /bin/bash -c 'ls -l'`
+
+#### List Pods
+|Command|description|
+|----------------|-------------|
+|`kubectl get pods`| list the pod within default namespace|
+|`kubectl get pods -o wide`| list all the pod with detailed view|
+|`kubectl get pods -n kube-system`| List the pods within given Namespace|
+|`kubectl get pods --selector app=test`| list all the pods which have given selector|
+|`kubectl get pods --selector app=test, application=testing`|filter and list all the pods with combination of selector criteria|
+|`kubectl get pods -A` _or_ `kubectl get pods --all-namespaces`| list all the pods for all namespaces within the cluster|
+|`kubectl get pods --show-labels`| list all pods with list of labels|
+|`kubectl describe pod xyz`| get the status of the pods|
 
 
 ### ReplicaSets
