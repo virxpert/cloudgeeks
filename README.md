@@ -62,7 +62,7 @@ To get all pods in all Namespaces
 
 `k get all -A`
 
-|shorthand| description
+|shorthand | description |
 | -------- | ----------- | 
 |`-A` | used for shorthand for `--all-namespaces` |
 |`-o wide`| display the complete details if the command e.g. labels etc|
@@ -85,16 +85,16 @@ below command remote into the POD and get the output by closing the session
 `k exec pod-name --ti -- /bin/bash -c 'ls -l'`
 
 #### List Pods
-|Command  |description|
-|--------- |------------- |
-|`kubectl get pods`| list the pod within default namespace |
-|`kubectl get pods -o wide`| list all the pod with detailed view |
-|`kubectl get pods -n kube-system`| List the pods within given Namespace |
-|`kubectl get pods --selector app=test`| list all the pods which have given selector |
-|`kubectl get pods --selector app=test, application=testing`|filter and list all the pods with combination of selector criteria |
-|`kubectl get pods -A` _or_ `kubectl get pods --all-namespaces`| list all the pods for all namespaces within the cluster |
-|`kubectl get pods --show-labels`| list all pods with list of labels |
-|`kubectl describe pod xyz`| get the status of the pods |
+| Command  | description |
+| --------- | ------------- |
+| `kubectl get pods` | list the pod within default namespace |
+| `kubectl get pods -o wide` | list all the pod with detailed view |
+| `kubectl get pods -n kube-system` | List the pods within given Namespace |
+| `kubectl get pods --selector app=test` | list all the pods which have given selector |
+| `kubectl get pods --selector app=test, application=testing` | filter and list all the pods with combination of selector criteria |
+| `kubectl get pods -A` _or_ `kubectl get pods --all-namespaces` | list all the pods for all namespaces within the cluster |
+| `kubectl get pods --show-labels` | list all pods with list of labels |
+| `kubectl describe pod xyz` | get the status of the pods |
 
 
 ### ReplicaSets
