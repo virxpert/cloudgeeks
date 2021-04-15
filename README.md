@@ -187,13 +187,15 @@ The _Service Mesh_ provide the complex connection/resources such as
 - Advanced Metrics
 ### Labels
 
-`kubectl get nodes -l system=secondary`
+```
+kubectl get nodes -l system=secondary
 
-`k get po -n testing --show-labels`
+k get po -n testing --show-labels
 
-`k delete pods -n testing -l system=secondary`
+k delete pods -n testing -l system=secondary
 
-`k get all -A -o wide --show-labels`
+k get all -A -o wide --show-labels
+```
 
 Label Node:
 
