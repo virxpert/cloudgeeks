@@ -70,9 +70,6 @@ To get all pods in all Namespaces
 | `less /var/log/syslog` | running logs of the server |
 |`: ` + _shift +end_ | makes the realtime log stream in the syslog|
 |`du -h /opt/` | gives the file size of the path provided|
-
-|a|b|
-|-------------|---------------|
 |`wc -l` | gives you the word count length |
 |`sed 's/unix/linux/2'` | sed command is Stream Editor where `'s'` == substitute/'_what_'/'_with what_'/`'2'` (replace second occurance)in the line|
 ### Pods
