@@ -526,12 +526,11 @@ kubectl patch pv pvvol-1 -p \
 k taint nodes worker bubba=value:PreferNoSchedule
 ```
 `k taint nodes worker bubba-` ==> untaint the node
-<<<<<<< HEAD
+
   ### Tolerations
-=======
+
  
-  #### Tolerations
->>>>>>> 4cadcfdd84e6a4df78ca9eec86d91a627bd23e63
+
 
   Setting tolerations on a node are used to schedule Pods on tainted nodes. This provides an easy way to avoid Pods using the node. Only those with a particular toleration would be scheduled.
 
