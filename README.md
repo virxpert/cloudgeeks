@@ -512,6 +512,7 @@ kubectl patch pv pvvol-1 -p \
   
   The Scheduler goes through a set of _filters_ or _Predicates_ to find available nodes and then rank each node using priority functions.
 
+
   ### Taints
   
 
@@ -525,8 +526,11 @@ kubectl patch pv pvvol-1 -p \
 k taint nodes worker bubba=value:PreferNoSchedule
 ```
 `k taint nodes worker bubba-` ==> untaint the node
- 
+
   ### Tolerations
+
+ 
+
 
   Setting tolerations on a node are used to schedule Pods on tainted nodes. This provides an easy way to avoid Pods using the node. Only those with a particular toleration would be scheduled.
 
