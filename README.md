@@ -75,6 +75,8 @@ To get all pods in all Namespaces
 | `sed 's/unix/linux/2'` | sed command is Stream Editor where `'s'` == substitute/'_what_'/'_with what_'/`'2'` (replace second occurance)in the line|
 
 
+`sudo docker ps | wc -l` ==> provides the total running containers within the targetted node
+
 ### Pods
 
 `k run pod --image=nginx --dry-run=client -oyaml >pod.yaml`
@@ -187,13 +189,15 @@ The _Service Mesh_ provide the complex connection/resources such as
 - Advanced Metrics
 ### Labels
 
-`kubectl get nodes -l system=secondary`
+```
+kubectl get nodes -l system=secondary
 
-`k get po -n testing --show-labels`
+k get po -n testing --show-labels
 
-`k delete pods -n testing -l system=secondary`
+k delete pods -n testing -l system=secondary
 
-`k get all -A -o wide --show-labels`
+k get all -A -o wide --show-labels
+```
 
 Label Node:
 
@@ -516,6 +520,81 @@ kubectl patch pv pvvol-1 -p \
   - PreferNoScheduling
   - NoExecute
 
+```
+k taint nodes worker bubba=value:PreferNoSchedule
+```
+`k taint nodes worker bubba-` ==> untaint the node
   #### Tolerations
 
   Setting tolerations on a node are used to schedule Pods on tainted nodes. This provides an easy way to avoid Pods using the node. Only those with a particular toleration would be scheduled.
+
+
+### Troubleshooting Tips and tricks
+
+K8s is completly reliant on API calls and is sensitive to network issues, so to start with the initial troubleshooting, start with ***_dig_*** and/or ***_tcpdump_***
+
+|3rd Party Tool| Description|
+|-|-|
+|fluentd | a useful data collector for a unified logging layer|
+|Prometheus| |
+
+
+
+
+```
+kubectl logs <pod name>
+```
+
+Check cluster startup 
+```
+systemctl status kubelet.service | grep -A 3 -i active
+```
+
+Location for `kubeadm.conf` ==> `/etc/systemd/system/kubelet.service.d/10-kubeadm.conf`
+
+this config file contains several settings including the location to the StaticPodPath where kublets will read the file and start every Pod.
+
+Path for the Static Pod yaml ==> `/etc/kubernetes/manifests/`
+
+```
+master@ubuntu-master:/etc/kubernetes/manifests$ ls -l
+total 16
+-rw------- 1 root root 2191 Dec 24 17:04 etcd.yaml
+-rw------- 1 root root 3962 Dec 24 17:06 kube-apiserver.yaml
+-rw------- 1 root root 3463 Dec 24 17:06 kube-controller-manager.yaml
+-rw------- 1 root root 1384 Dec 24 17:06 kube-scheduler.yaml
+```
+
+### krew
+
+Krew is the **_kubectl plugin manager_** allows for cross-platform packaging.
+
+### Metrics Server
+
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.4.2/components.yaml
+```
+The Metric Server Pod might crash due to the certificte issue and gives error
+
+for the lab environment edit the Metric server deployment and add `--kubelet-insecure-tls` within the `arg` section of the container.
+
+```
+ spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        image: k8s.gcr.io/metrics-server/metrics-server:v0.4.2
+```
+
+```
+kubectl top nodes
+
+master@ubuntu-master:$ k top node
+NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+ubuntu-master   204m         10%    2185Mi          56%
+ubuntu-worker   81m          4%     1061Mi          56%
+```
