@@ -533,6 +533,14 @@ k taint nodes worker bubba=value:PreferNoSchedule
 
 K8s is completly reliant on API calls and is sensitive to network issues, so to start with the initial troubleshooting, start with ***_dig_*** and/or ***_tcpdump_***
 
+|3rd Party Tool| Description|
+|-|-|
+|fluentd | a useful data collector for a unified logging layer|
+|Prometheus| |
+
+
+
+
 ```
 kubectl logs <pod name>
 ```
@@ -555,4 +563,38 @@ total 16
 -rw------- 1 root root 3962 Dec 24 17:06 kube-apiserver.yaml
 -rw------- 1 root root 3463 Dec 24 17:06 kube-controller-manager.yaml
 -rw------- 1 root root 1384 Dec 24 17:06 kube-scheduler.yaml
+```
+
+### krew
+
+Krew is the **_kubectl plugin manager_** allows for cross-platform packaging.
+
+### Metrics Server
+
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.4.2/components.yaml
+```
+The Metric Server Pod might crash due to the certificte issue and gives error
+
+for the lab environment edit the Metric server deployment and add `--kubelet-insecure-tls` within the `arg` section of the container.
+
+```
+ spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-insecure-tls
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        image: k8s.gcr.io/metrics-server/metrics-server:v0.4.2
+```
+
+```
+kubectl top nodes
+
+master@ubuntu-master:$ k top node
+NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+ubuntu-master   204m         10%    2185Mi          56%
+ubuntu-worker   81m          4%     1061Mi          56%
 ```
