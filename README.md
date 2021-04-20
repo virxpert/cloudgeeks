@@ -513,6 +513,7 @@ kubectl patch pv pvvol-1 -p \
   The Scheduler goes through a set of _filters_ or _Predicates_ to find available nodes and then rank each node using priority functions.
 
   #### Taints
+  
 
   A node with a particular taint will repel Pods without tolerations for that taint. A taint is expressed as key=value:effect. The key and the value are created by the administrator.
 
