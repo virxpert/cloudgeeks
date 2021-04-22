@@ -87,7 +87,15 @@ below command remote into the POD and keep the session alive
 
 below command remote into the POD and get the output by closing the session
 
-`k exec pod-name --ti -- /bin/bash -c 'ls -l'`
+`k exec pod-name -ti -- /bin/bash -c 'ls -l'`
+`k exec -i -t --container container-name -- /bin/bash`
+
+The short option `-i` and `-t` are same as `--stdin` and `--tty`
+
+```
+kubextl exec pod-name -- env
+k exec pod-name -- ps aux
+```
 
 #### List Pods
 ....
