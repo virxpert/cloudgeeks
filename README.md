@@ -87,7 +87,15 @@ below command remote into the POD and keep the session alive
 
 below command remote into the POD and get the output by closing the session
 
-`k exec pod-name --ti -- /bin/bash -c 'ls -l'`
+`k exec pod-name -ti -- /bin/bash -c 'ls -l'`
+`k exec -i -t --container container-name -- /bin/bash`
+
+The short option `-i` and `-t` are same as `--stdin` and `--tty`
+
+```
+kubextl exec pod-name -- env
+k exec pod-name -- ps aux
+```
 
 #### List Pods
 ....
@@ -604,3 +612,62 @@ NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 ubuntu-master   204m         10%    2185Mi          56%
 ubuntu-worker   81m          4%     1061Mi          56%
 ```
+
+### Context
+
+- list all the contexts avaiable
+
+```
+kubectl config get-context
+```
+- running commmand withing a given context
+
+```
+kubectl --context=remote-context get pods
+```
+
+- change the context to new 
+
+```
+kubectl config use-context remote-context
+```
+
+- set different namesapce for the current context
+
+```
+kubectl config set-context $(kubectl config current-context) --namespace=newnamespace
+```
+
+- Create Roles
+
+```
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: development
+  name: developer
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "replicasets", "pods"]
+  verbs: ["list", "get", "watch", "create", "update", "patch", "delete"]
+```
+
+- Create RoleBinding
+
+```
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: developer-role-binding
+  namespace: development
+subjects:
+- kind: User
+  name: DevDan
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: ""
+```
+
+
