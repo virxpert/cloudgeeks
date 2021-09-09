@@ -217,6 +217,10 @@ remove label from Node:
 
 ### Job & CronJobs
 
+
+_CronJobs_ are useful for creating periodic and recurring tasks, like running backups or sending emails. CronJobs can also schedule individual tasks for a specific time, such as scheduling a Job for when your cluster is likely to be idle.
+
+
 ### annotations
 
 ### Deployments
@@ -669,5 +673,4 @@ roleRef:
   name: developer
   apiGroup: ""
 ```
-
 
